@@ -40,6 +40,9 @@ class Whisper {
   DynamicLibrary _openLib() {
     if (Platform.isAndroid) {
       return DynamicLibrary.open('libwhisper.so');
+    } else if (Platform.isLinux) {
+      // Fix pour Linux
+      return DynamicLibrary.open('libwhisper_ggml_plus_plugin.so');
     } else if (Platform.isWindows) {
       return DynamicLibrary.open('whisper_ggml_plus.dll');
     } else {
